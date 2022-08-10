@@ -75,7 +75,7 @@ const fetchData = () => {
 const renderImages = arrImages => {
     // set background image with new data got
     const img = arrImages[0].urls.full
-    objs.body.style.background = `url('${img}') no-repeat center center fixed`
+    objs.body.style.background = `url('${img}') center center/cover fixed no-repeat`
     // create carousel
     createCarousel(arrImages)
 }
@@ -90,7 +90,7 @@ const setImageSelected = eleImage => {
 
 const updateBackgroundImage = event => {
     const img = event.target.dataset.url
-    objs.body.style.background = `url('${img}') no-repeat center center fixed`
+    objs.body.style.background = `url('${img}') center center/cover fixed no-repeat`
     objs.preUrl = img
     setImageSelected(event.target)
 
@@ -105,12 +105,12 @@ const mouseenterBackgroundImage = event => {
         str = str.slice(iStart + 1, iEnd)
         objs.preUrl = str
     }
-    objs.body.style.background = `url('${img}') no-repeat center center fixed`
+    objs.body.style.background = `url('${img}') center center/cover fixed no-repeat`
 }
 
 const mouseleaveBackgroundImage = event => {
     if(objs.preUrl) {
-        objs.body.style.background = `url('${objs.preUrl}') no-repeat center center fixed`
+        objs.body.style.background = `url('${objs.preUrl}') center center/cover fixed no-repeat`
         objs.preUrl = null
     }
 }
@@ -125,8 +125,11 @@ const  createCarousel = (arrImages) => {
         }
 
         const img = element.urls.regular
-        item.style.background = `url('${img}') no-repeat center center fixed`
+        item.style.background = `url('${img}') center center/cover fixed no-repeat`
+        item.style.backgroundSize = 'cover'
         item.dataset.index = index
+        item.style.animation = 'fadeIn 0.25s forwards'
+        item.style.animationDelay = `${0.1 * index}s`
         item.dataset.url = element.urls.full
         objs.carousel.appendChild(item)
 
